@@ -21,13 +21,13 @@ function playRound(playerSelection, computerSelection) {
     case "rock":
 	    switch(computerSelection) {
 				case "rock":
-          return ("Tie! Rock N Rock");
+          return [0,0];
           break;
         case "paper":
-          return ("You Lose! Paper beats Rock");
+          return [1,0];
           break;
         case "scissors":
-          return ("WIN! Rock crushes scissors");
+          return [0,1];
           break;
         default:
 	    		return ("ERROR");
@@ -37,13 +37,13 @@ function playRound(playerSelection, computerSelection) {
     case "paper":
 	    switch(computerSelection) {
 				case "rock":
-          return ("WIN! Paper beats rock");
+					return [0,1];
           break;
         case "paper":
-          return ("TIE! Paperization");
+					return [0,0];
           break;
         case "scissors":
-          return ("You Lose! Scissors beats paper");
+					return [1,0];
           break;
         default:
 	    		return ("ERROR");
@@ -53,13 +53,13 @@ function playRound(playerSelection, computerSelection) {
     case "scissors":
 	    switch(computerSelection) {
 				case "rock":
-          return ("You Lose! Rocks beats scissors");
+					return [1,0];
           break;
         case "paper":
-          return ("WIN! scissors cuts paper");
+					return [0,1];
           break;
         case "scissors":
-          return ("TIE! Tiejeretazo");
+					return [0,0];
           break;
         default:
 	    		return ("ERROR");
@@ -71,6 +71,22 @@ function playRound(playerSelection, computerSelection) {
 	}
 }
 
-const playerSelection = prompt()
-const computerSelection = computerPlay()
-console.log(playRound(playerSelection, computerSelection))
+function game () {
+	let computerWins = 0
+	let playerWins = 0
+	let rounds = 5
+	for ( i = 0; i < rounds; i++) {
+		const playerSelection = prompt()
+		const computerSelection = computerPlay()
+		const roundScore = playRound (playerSelection, computerSelection)
+		computerWins += roundScore[0]
+		playerWins += roundScore[1]
+	}
+	if (computerWins > playerWins) {
+		console.log("Computer wins")
+	} else {
+		console.log("Player wins")
+	}
+	console.log("Score: computer "+computerWins+" player "+playerWins)
+}
+game()
